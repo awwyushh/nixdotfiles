@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+ myAliases = {
+      ll = "ls -l";
+ };
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -71,6 +76,15 @@
     # EDITOR = "emacs";
   };
 
+  programs.bash = {
+    enable = true;
+    shellAliases = myAliases;
+  };
+
+  programs.zsh = {
+    enable = true;
+    shellAliases = myAliases;
+  };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
