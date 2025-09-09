@@ -11,8 +11,11 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.device = "nodev";
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -81,15 +84,27 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+
+  virtualisation.docker = {
+    enable= true;
+    enableOnBoot = true;
+  };
+
+
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ayush = {
     isNormalUser = true;
     description = "Ayush";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
+  
+
+
+  # users.users.ayush.extraGroups = [ "docker" ];
 
   # Install firefox.
   programs.firefox.enable = true;

@@ -22,11 +22,14 @@ in
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.hello
-
+    hello
+    vscode
+    zsh-powerlevel10k
+    meslo-lgs-nf
+    gedit
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -85,6 +88,14 @@ in
     enable = true;
     shellAliases = myAliases;
   };
+
+
+  #  home.file.".p10k.zsh".text = builtins.readFile ./p10k.zsh;
+
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+
+
 }
